@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Ticket Reservation Form</title>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+    }
+    button {
+      padding: 8px;
+      background-color: #4caf50;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Air Ticket Reservation Form</h2>
+  
+  <form id="reservationForm">
+    <label for="source">Source (Starting Point):</label>
+    <input type="text" id="source" name="source" autocomplete="off">
+    
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" name="destination" autocomplete="off">
+    
+    <label for="travelDate">Travel Date:</label>
+    <input type="date" id="travelDate" name="travelDate">
+    
+    <label for="email">Email ID:</label>
+    <input type="email" id="email" name="email">
+    <p id="emailError" class="error"></p>
+    
+    <button type="button" onclick="clearFields()">Clear Source/Destination</button>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById('reservationForm').addEventListener('submit', function(event) {
+      // Validate email
+      var emailInput = document.getElementById('email');
+      var emailError = document.getElementById('emailError');
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailPattern.test(emailInput.value)) {
+        event.preventDefault(); // Prevent form submission
+        emailError.textContent = 'Please enter a valid email address.';
+      } else {
+        emailError.textContent = ''; // Clear previous error message
+      }
+    });
+
+    function clearFields() {
+      document.getElementById('source').value = '';
+      document.getElementById('destination').value = '';
+    }
+  </script>
+
+</body>
+</html>

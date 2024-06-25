@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+        }
+        .left {
+            width: 30%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .left h2 {
+            cursor: pointer;
+            margin: 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .left h2:hover {
+            background-color: #e0e0e0;
+        }
+        .right {
+            width: 70%;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .right h1 {
+            margin-top: 0;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .task span {
+            flex-grow: 1;
+        }
+        .task button {
+            margin-left: 10px;
+        }
+        .add-task {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .add-task input {
+            flex-grow: 1;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .add-task button {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="left">
+    <div class="user-info">
+        <h2>Kirti Chhabra</h2>
+        <p>kirtichhabra99@gmail.com</p>
+    </div>
+    <div class="search">
+        <input type="text" placeholder="Search">
+    </div>
+    <div class="sidebar">
+        <h2 onclick="showContent('MyDay')">My Day</h2>
+        <h2 onclick="showContent('Important')">Important</h2>
+        <h2 onclick="showContent('Planned')">Planned</h2>
+        <h2 onclick="showContent('Assigned')">Assigned to me</h2>
+        <h2 onclick="showContent('Tasks')">Tasks</h2>
+    </div>
+</div>
+
+<div class="right" id="rightSection">
+    <div id="MyDay">
+        <h1>My Day</h1>
+        <div class="add-task">
+            <input type="text" id="taskInputMyDay" placeholder="Add a new task...">
+            <button onclick="addTask('MyDay')">Add</button>
+        </div>
+        <ul id="taskListMyDay"></ul>
+    </div>
+    <div id="Important">
+        <h1>Important</h1>
+        <div class="add-task">
+            <input type="text" id="taskInputImportant" placeholder="Add a new task...">
+            <button onclick="addTask('Important')">Add</button>
+        </div>
+        <ul id="taskListImportant"></ul>
+    </div>
+    <div id="Planned">
+        <h1>Planned</h1>
+        <div class="add-task">
+            <input type="text" id="taskInputPlanned" placeholder="Add a new task...">
+            <button onclick="addTask('Planned')">Add</button>
+        </div>
+        <ul id="taskListPlanned"></ul>
+    </div>
+    <div id="Assigned">
+        <h1>Assigned to me</h1>
+        <div class="add-task">
+            <input type="text" id="taskInputAssigned" placeholder="Add a new task...">
+            <button onclick="addTask('Assigned')">Add</button>
+        </div>
+        <ul id="taskListAssigned"></ul>
+    </div>
+    <div id="Tasks">
+        <h1>Tasks</h1>
+        <div class="add-task">
+            <input type="text" id="taskInputTasks" placeholder="Add a new task...">
+            <button onclick="addTask('Tasks')">Add</button>
+        </div>
+        <ul id="taskListTasks"></ul>
+    </div>
+</div>
+
+<script>
+    function showContent(title) {
+        // Hide all sections first
+        const sections = document.querySelectorAll('.right > div');
+        sections.forEach(section => {
+            section.style.display = 'none';
+        });
+
+        // Show the selected section
+        const selectedSection = document.getElementById(title);
+        if (selectedSection) {
+            selectedSection.style.display = 'block';
+        }
+    }
+
+    function addTask(sectionId) {
+        const taskInput = document.getElementById(`taskInput${sectionId}`);
+        const taskList = document.getElementById(`taskList${sectionId}`);
+        
+        if (taskInput.value.trim() !== "") {
+            const li = document.createElement('li');
+            li.className = 'task';
+            li.innerHTML = `
+                <input type="checkbox">
+                <span>${taskInput.value}</span>
+                <button onclick="deleteTask(this)">Delete</button>
+            `;
+            taskList.appendChild(li);
+            taskInput.value = '';
+        }
+    }
+
+    function deleteTask(button) {
+        const task = button.parentElement;
+        task.remove();
+    }
+</script>
+
+</body>
+</html>

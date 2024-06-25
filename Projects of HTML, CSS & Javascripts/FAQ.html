@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ</title>
+    <style>
+        .answer-input {
+            display: none;
+            margin-top: 10px;
+        }
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>General IQ Questions</h1>
+    <div class="question">
+        <h2>Q1. What comes next in the sequence: 2, 4, 8, 16, ...?</h2>
+        <button class="answer">+</button>
+        <div class="answer-input">
+            <input type="text" placeholder="Write your answer here">
+            <button class="submit">Submit</button>
+        </div>
+    </div>
+    <div class="question">
+        <h2>Q2. Hand is to Glove as Foot is to ___?</h2>
+        <button class="answer">+</button>
+        <div class="answer-input">
+            <input type="text" placeholder="Write your answer here">
+            <button class="submit">Submit</button>
+        </div>
+    </div>
+    <div class="question">
+        <h2>Q3. If Tom is taller than Jerry and Jerry is taller than Sam, who is the tallest?</h2>
+        <button class="answer">+</button>
+        <div class="answer-input">
+            <input type="text" placeholder="Write your answer here">
+            <button class="submit">Submit</button>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.answer').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.answer-input').forEach(input => {
+                    input.classList.remove('show');
+                });
+                const answerInput = button.nextElementSibling;
+                answerInput.classList.toggle('show');
+            });
+        });
+
+        document.querySelectorAll('.submit').forEach(button => {
+            button.addEventListener('click', () => {
+                const inputField = button.previousElementSibling;
+                const answer = inputField.value;
+                alert(`Your answer: ${answer}`);
+                inputField.value = ""; // Clear the input field
+                button.parentElement.classList.remove('show'); // Hide the input field after submission
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>menu</title>
+    <style>
+        .flex-container{
+            display:flex;
+            flex-wrap:wrap;
+            background-color: aqua;
+        }
+        .flex-container> div{
+            background-color:#f1f1f1;
+            width:600px;
+            margin:30px;
+            text-align:center;
+            line-height: 90px;
+            font-size:50px;
+            
+        }
+        .quantity {
+            display: none;
+            margin-top: 10px;
+        }
+        .show {
+            display: block;
+        }
+    </style>
+    </head>
+    <body>
+        <h1>Our Menu</h1>
+     <div class="flex-container">
+        <div class="item">Samosa <button class="book">+</button>
+        <div class="quantity">
+            <input type="text" placeholder="Write your answer here">
+            <button class="ok" onclick="myFunction()">ok</button>
+        </div>
+        </div>
+        <div class="item">Kachori <button class="book">+</button>
+            <div class="quantity">
+                <input type="text" placeholder="Write your answer here">
+                <button class="ok"onclick="myFunction()">ok</button>
+            </div>
+        </div>
+        <div class="item">Panipuri  <button class="book">+</button>
+            <div class="quantity">
+                <input type="text" placeholder="Write your answer here">
+                <button class="ok"onclick="myFunction()">ok</button>
+            </div>
+        </div>
+        <div class="item">GulabJamun  <button class="book">+</button>
+            <div class="quantity">
+                <input type="text" placeholder="Write your answer here">
+                <button class="ok"onclick="myFunction()">ok</button>
+            </div>
+        </div>   
+        <div class="item">Idli    <button class="book">+</button>
+            <div class="quantity">
+                <input type="text" placeholder="Write your answer here">
+                <button class="ok"onclick="myFunction()">ok</button>
+            </div>
+        </div>
+        <div class="item">Vada  <button class="book">+</button>
+            <div class="quantity">
+                <input type="text" placeholder="Write your answer here">
+                <button class="ok"onclick="myFunction()">ok</button>
+            </div>
+        </div>  
+</div>
+    </body>
+    <script>
+        function myFunction(button) {
+    const itemDiv = button.parentElement;
+    itemDiv.style.backgroundColor = "green";
+}
+        document.querySelectorAll('.book').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.quantity').forEach(input => {
+                    input.classList.remove('show');
+                });
+                const quantity = button.nextElementSibling;
+                quantity.classList.toggle('show');
+            });
+        });
+
+        document.querySelectorAll('.ok').forEach(button => {
+            button.addEventListener('click', () => {
+                const inputField = button.previousElementSibling;
+                const answer = inputField.value;
+                alert(`total Quantity: ${answer}`);
+                inputField.value = ""; // Clear the input field
+                button.parentElement.classList.remove('show'); // Hide the input field after submission
+            });
+        });
+    </script>
+</html>
